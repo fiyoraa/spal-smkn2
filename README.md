@@ -104,7 +104,7 @@ Proyek ini telah dikonfigurasi untuk dapat dideploy secara terpisah (Frontend di
    * `APP_ENV`: `production`
    * `APP_DEBUG`: `false`
    * `MIGRATION_KEY`: `spal-migrasi-2026`
-6. Dapatkan URL publik backend yang dihasilkan oleh Railway di bagian **Domains** (misalnya `https://spal-backend.up.railway.app`).
+6. Dapatkan URL publik backend yang dihasilkan oleh Railway di bagian **Domains** (misalnya `https://spal-smkn2-backend.up.railway.app`).
 
 ### 2. Konfigurasi Frontend di Vercel
 1. Masuk ke [Vercel](https://vercel.com) menggunakan GitHub.
