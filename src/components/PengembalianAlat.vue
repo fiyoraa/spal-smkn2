@@ -7,7 +7,8 @@ import {
   AlertTriangle, 
   CheckCircle, 
   Camera,
-  RefreshCw
+  RefreshCw,
+  Image
 } from '@lucide/vue';
 
 const props = defineProps({
@@ -383,9 +384,9 @@ onUnmounted(() => {
             <!-- Initial photo if condition is not perfect -->
             <transition name="fade">
               <div v-if="returnCond !== 'Sangat Baik' && returnCond !== 'Baik'" class="preview-upload-zone">
-                <UploadCloud :size="24" class="upload-icon-dimmed" />
+                <Image :size="24" class="upload-icon-dimmed" />
                 <span>Foto Awal Peminjaman</span>
-                <p class="upload-filename">kondisi_awal_serah_terima.jpg</p>
+                <p class="upload-filename">Tidak ada foto serah terima awal</p>
               </div>
             </transition>
           </div>
@@ -878,8 +879,8 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: rgba(0, 0, 0, 0.01);
-  border: 1.5px dashed rgba(148, 163, 184, 0.15);
+  background: rgba(0, 0, 0, 0.015);
+  border: 1px solid rgba(148, 163, 184, 0.12);
   border-radius: var(--radius-lg);
   gap: 8px;
   text-align: center;

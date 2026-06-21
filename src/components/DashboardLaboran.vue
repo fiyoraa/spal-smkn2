@@ -452,7 +452,7 @@ const getItemCategoryColor = (itemName) => {
               <span class="stat-card-title">Pengajuan Pending</span>
             </div>
             <div class="stat-card-body">
-              <h2 class="stat-card-value">{{ approvals.length }}</h2>
+              <h2 class="stat-card-value">{{ pendingApprovalsCount }}</h2>
               <span class="stat-card-desc">Menunggu approval laboran</span>
             </div>
           </div>
@@ -611,7 +611,7 @@ const getItemCategoryColor = (itemName) => {
             </div>
             <div>
               <h2 style="font-family: var(--font-number); font-size: 26px; font-weight: 800; line-height: 1;">
-                {{ user.role === 'Laboran' ? totalDipinjam : approvals.length }}
+                {{ user.role === 'Laboran' ? totalDipinjam : pendingApprovalsCount }}
               </h2>
             </div>
           </div>
