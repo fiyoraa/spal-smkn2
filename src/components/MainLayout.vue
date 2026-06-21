@@ -171,14 +171,41 @@ const searchQuery = ref('');
 // Unread notifications count
 const showAllNotificationsModal = ref(false);
 
-const initialNotifications = [
-  { id: 1, text: 'Peminjaman Mikroskop oleh Budi Santoso menunggu Approval.', time: '5 menit lalu', type: 'pending', read: false },
-  { id: 2, text: 'Alat Solder Listrik A-12 terlambat dikembalikan.', time: '2 jam lalu', type: 'warning', read: false },
-  { id: 3, text: 'Laporan bulanan Laboratorium Fisika siap diunduh.', time: '1 hari lalu', type: 'info', read: false }
-];
+const notifications = ref([]);
 
-const storedNotifs = localStorage.getItem('sys_notifications');
-const notifications = ref(storedNotifs ? JSON.parse(storedNotifs) : initialNotifications);
+const getNotificationsKey = () => {
+  return `sys_notifications_${props.user?.id || 'guest'}`;
+};
+
+const saveNotifications = () => {
+  localStorage.setItem(getNotificationsKey(), JSON.stringify(notifications.value));
+};
+
+onMounted(() => {
+  const key = getNotificationsKey();
+  const stored = localStorage.getItem(key);
+  if (stored) {
+    notifications.value = JSON.parse(stored);
+  } else {
+    const role = props.user?.role || 'Siswa';
+    let initial = [];
+    if (role === 'Laboran') {
+      initial = [
+        { id: 1, text: 'Peminjaman Mikroskop oleh Budi Santoso menunggu Approval.', time: '5 menit lalu', type: 'pending', read: false },
+        { id: 2, text: 'Alat Solder Listrik A-12 terlambat dikembalikan.', time: '2 jam lalu', type: 'warning', read: false },
+        { id: 3, text: 'Laporan bulanan Laboratorium Fisika siap diunduh.', time: '1 hari lalu', type: 'info', read: false }
+      ];
+    } else {
+      initial = [
+        { id: 4, text: 'Pengajuan peminjaman Laptop Lenovo Anda telah disetujui.', time: '10 menit lalu', type: 'info', read: false },
+        { id: 5, text: 'Tenggat waktu pengembalian alat Anda adalah 3 hari lagi.', time: '1 jam lalu', type: 'warning', read: false },
+        { id: 6, text: 'Selamat bergabung di aplikasi SPAL SMKN 2 Palembang!', time: '1 hari lalu', type: 'info', read: false }
+      ];
+    }
+    notifications.value = initial;
+    saveNotifications();
+  }
+});
 
 const unreadCount = computed(() => {
   return notifications.value.filter(n => !n.read).length;
@@ -197,14 +224,14 @@ const closeDropdowns = () => {
 
 const clearNotifications = () => {
   notifications.value.forEach(n => n.read = true);
-  localStorage.setItem('sys_notifications', JSON.stringify(notifications.value));
+  saveNotifications();
 };
 
 const markAsRead = (id) => {
   const notif = notifications.value.find(n => n.id === id);
   if (notif) {
     notif.read = true;
-    localStorage.setItem('sys_notifications', JSON.stringify(notifications.value));
+    saveNotifications();
   }
 };
 
