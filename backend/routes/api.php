@@ -43,3 +43,38 @@ Route::get('/blacklist', function () {
         'data' => $blacklist
     ]);
 });
+
+// Migration & Seeding Endpoint (for remote deployment)
+Route::get('/migrate', function () {
+    if (request('key') !== env('MIGRATION_KEY', 'spal-migrasi-2026')) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Unauthorized key.'
+        ], 401);
+    }
+
+    try {
+        // Run migrations
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        $migrateOutput = \Illuminate\Support\Facades\Artisan::output();
+
+        // Run seeders
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        $seedOutput = \Illuminate\Support\Facades\Artisan::output();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Migrations and seeders executed successfully!',
+            'details' => [
+                'migrate' => $migrateOutput,
+                'seed' => $seedOutput
+            ]
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Failed to run migrations.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+});

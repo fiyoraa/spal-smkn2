@@ -224,4 +224,19 @@ Telah diselesaikan pemisahan struktural yang menyeluruh antara tampilan Desktop 
    - Komponen [RiwayatPeminjaman.vue](file:///c:/Users/fihil/OneDrive/Dokumen/from%20yora/Project%20RPL/src/components/RiwayatPeminjaman.vue) membagi visualisasi log menjadi Desktop Modern Table (lebar, data lengkap) dan Mobile Stack Cards (vertikal, compact) dengan penanda status denda terintegrasi secara rapi.
    
 4. **Verifikasi & Build Sukses**:
-   - Menjalankan build produksi (`npm run build`) dengan sukses tanpa adanya warning kompilasi, serta memverifikasi bahwa perubahan berjalan mulus dan responsif di server pengembangan lokal.
+    - Menjalankan build produksi (`npm run build`) dengan sukses tanpa adanya warning kompilasi, serta memverifikasi bahwa perubahan berjalan mulus dan responsif di server pengembangan lokal.
+
+--------------------------------------------------
+
+Update: Konfigurasi Deployment Multi-Platform (Vercel & Railway) dan Mekanisme Migrasi Mandiri
+
+Pengaturan integrasi deployment multi-platform telah selesai dikonfigurasi guna memisahkan hosting Vue 3 frontend (Vercel) dan Laravel backend + MySQL database (Railway) dengan mulus tanpa kendala CORS.
+
+1. **Konfigurasi Reverse Proxy Vercel (`vercel.json`)**:
+   - Membuat berkas [vercel.json](file:///c:/Users/fihil/OneDrive/Dokumen/from%20yora/Project%20RPL/vercel.json) pada root direktori proyek. Konfigurasi ini mendefinisikan aturan rewrite yang mengalihkan seluruh pemanggilan rute `/api/:path*` di frontend ke domain Railway backend. Hal ini mengeliminasi masalah CORS browser karena browser tetap melakukan request ke origin Vercel yang sama.
+
+2. **Rute Migrasi Jarak Jauh Terproteksi (`/api/migrate`)**:
+   - Menambahkan rute GET `/api/migrate` pada berkas [api.php](file:///c:/Users/fihil/OneDrive/Dokumen/from%20yora/Project%20RPL/backend/routes/api.php). Endpoint ini memfasilitasi jalannya migrasi skema database (`migrate --force`) dan seeding data awal (`db:seed --force`) langsung dari peramban (browser) web, sehingga pengguna tidak perlu menggunakan CLI/terminal jarak jauh. Route dilindungi oleh verifikasi parameter query `key` berbasis variabel lingkungan `MIGRATION_KEY` untuk mencegah akses tidak sah.
+
+3. **Penyusunan Dokumentasi Deployment Terpadu**:
+   - Memperbarui berkas [README.md](file:///c:/Users/fihil/OneDrive/Dokumen/from%20yora/Project%20RPL/README.md) dengan menambahkan bagian panduan deployment terperinci. Panduan ini menjelaskan alur pembuatan akun Railway/Vercel, pengisian variabel lingkungan Laravel yang terintegrasi dengan MySQL di Railway, pemetaan domain, dan pengoperasian endpoint migrasi database.

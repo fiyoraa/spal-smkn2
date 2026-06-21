@@ -84,6 +84,47 @@ Aplikasi ini telah dikonfigurasi untuk dapat diakses secara nirkabel dari perang
 
 ---
 
+##  PANDUAN DEPLOYMENT (VERCEL & RAILWAY)
+
+Proyek ini telah dikonfigurasi untuk dapat dideploy secara terpisah (Frontend di Vercel dan Backend di Railway) tanpa mengalami masalah CORS.
+
+### 1. Konfigurasi Backend & Database di Railway
+1. Masuk ke [Railway](https://railway.app) menggunakan GitHub.
+2. Buat proyek baru dan pilih repositori `spal-smkn2`.
+3. Pada pengaturan layanan (Service Settings) repositori, atur **Root Directory** ke `/backend`.
+4. Tambahkan database MySQL di Railway (**Add** -> **Database** -> **MySQL**).
+5. Pada layanan Laravel Anda, hubungkan variabel lingkungan berikut di tab **Variables**:
+   * `DB_CONNECTION`: `mysql`
+   * `DB_HOST`: `${{MySQL.MYSQLHOST}}`
+   * `DB_PORT`: `${{MySQL.MYSQLPORT}}`
+   * `DB_DATABASE`: `${{MySQL.MYSQLDATABASE}}`
+   * `DB_USERNAME`: `${{MySQL.MYSQLUSER}}`
+   * `DB_PASSWORD`: `${{MySQL.MYSQLPASSWORD}}`
+   * `APP_KEY`: `base64:Fyy3wpQ227Xt9NUccdKs0yeG0LSF09jKv4B3aWYoenU=`
+   * `APP_ENV`: `production`
+   * `APP_DEBUG`: `false`
+   * `MIGRATION_KEY`: `spal-migrasi-2026`
+6. Dapatkan URL publik backend yang dihasilkan oleh Railway di bagian **Domains** (misalnya `https://spal-backend.up.railway.app`).
+
+### 2. Konfigurasi Frontend di Vercel
+1. Masuk ke [Vercel](https://vercel.com) menggunakan GitHub.
+2. Impor repositori `spal-smkn2`.
+3. Atur **Root Directory** ke `./` (root repositori utama, bukan `/backend`). Vercel akan mendeteksi Vite secara otomatis.
+4. Sebelum men-deploy atau setelah mendapatkan domain Railway Anda, buka berkas [vercel.json](file:///c:/Users/fihil/OneDrive/Dokumen/from%20yora/Project%20RPL/vercel.json) di root proyek dan ubah bagian `"destination"` agar mengarah ke domain Railway Anda:
+   ```json
+   "destination": "https://domain-railway-anda.up.railway.app/api/:path*"
+   ```
+5. Lakukan push perubahan ke GitHub agar Vercel melakukan build otomatis.
+
+### 3. Jalankan Migrasi Database
+1. Setelah backend Railway dan database aktif, kunjungi URL berikut melalui browser untuk menjalankan migrasi dan seeding data awal secara otomatis:
+   ```text
+   https://domain-railway-anda.up.railway.app/api/migrate?key=spal-migrasi-2026
+   ```
+2. Halaman akan menampilkan respon JSON sukses yang menandakan database telah terisi dengan akun uji coba dan 55 inventaris alat.
+
+---
+
 ##  RINGKASAN FITUR UTAMA
 
 ### 1. Autentikasi Cardless Asimetris
