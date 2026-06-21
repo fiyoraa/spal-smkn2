@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#46708F" />
+      <stop offset="100%" stop-color="#2c4c64" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+  <!-- Smooth Rounded Container -->
+  <rect width="48" height="48" rx="12" fill="url(#bgGrad)" />
+  <!-- Laboratory Flask (Erlenmeyer) -->
+  <path d="M20 12H28M21.5 12V18L13.5 31C12.5 32.5 13.5 34.5 15.5 34.5H32.5C34.5 34.5 35.5 32.5 34.5 31L26.5 18V12" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Stylized Liquid Level in Green/Emerald -->
+  <path d="M16.5 26.5C18 25.5 19.5 27 21 27C22.5 27 24 25.5 25.5 25.5C27 25.5 28.5 27 30 27C31.5 27 32 26.5 32 26.5L33.7 29.5C34.2 30.5 33.5 31.5 32.5 31.5H15.5C14.5 31.5 13.8 30.5 14.3 29.5L16.5 26.5Z" fill="url(#accentGrad)" />
+  <!-- Subtle Box on the side representing inventory & loans -->
+  <rect x="29" y="10" width="10" height="10" rx="3" fill="#38BDF8" stroke="#2c4c64" stroke-width="2" />
+  <path d="M32 15L34 17L37 13" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
