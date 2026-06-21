@@ -55,7 +55,7 @@ Route::get('/migrate', function () {
 
     try {
         // Run migrations
-        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--force' => true]);
         $migrateOutput = \Illuminate\Support\Facades\Artisan::output();
 
         // Run seeders
