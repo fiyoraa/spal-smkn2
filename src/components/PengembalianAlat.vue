@@ -297,7 +297,7 @@ onUnmounted(() => {
           <div class="reticle-corner bottom-right"></div>
           
           <!-- html5-qrcode video element destination -->
-          <div v-show="isCameraActive" id="qr-reader"></div>
+          <div id="qr-reader" :style="{ visibility: isCameraActive ? 'visible' : 'hidden', position: isCameraActive ? 'relative' : 'absolute', width: '100%', height: '100%' }"></div>
 
           <!-- Video placeholder / status prompt -->
           <div v-if="!isCameraActive" class="viewport-content">

@@ -374,7 +374,7 @@ const getStatusClass = (status) => {
               <div class="reticle-corner bottom-right"></div>
               
               <!-- html5-qrcode video element destination -->
-              <div v-show="isCameraActive" id="peminjaman-qr-reader"></div>
+              <div id="peminjaman-qr-reader" :style="{ visibility: isCameraActive ? 'visible' : 'hidden', position: isCameraActive ? 'relative' : 'absolute', width: '100%', height: '100%' }"></div>
 
               <!-- Placeholder/Error -->
               <div v-if="!isCameraActive" class="scanner-placeholder">
