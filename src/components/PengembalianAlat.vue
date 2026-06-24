@@ -1041,8 +1041,9 @@ onUnmounted(() => {
 }
 
 .btn-confirm-return:disabled {
-  background: #cbd5e1;
-  color: #94a3b8;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px dashed rgba(16, 185, 129, 0.3);
   opacity: 0.8;
   cursor: not-allowed;
   box-shadow: none;

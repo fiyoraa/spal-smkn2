@@ -1069,7 +1069,7 @@ const submitRejection = async () => {
 
 .btn-action-approve {
   flex: 1;
-  background: var(--color-action-primary);
+  background: var(--color-success);
   color: white;
   border: none;
   font-family: var(--font-number), sans-serif;
@@ -1078,11 +1078,13 @@ const submitRejection = async () => {
   padding: 14px 28px;
   border-radius: 9999px;
   cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s, box-shadow 0.2s;
 }
 
 .btn-action-approve:hover {
-  background: #355670;
+  background: #059669;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
 }
 
 .btn-action-approve:active {
@@ -1642,7 +1644,7 @@ const submitRejection = async () => {
 
 .btn-mobile-approve {
   flex: 1;
-  background: var(--color-action-primary);
+  background: var(--color-success);
   color: white;
   border: none;
   font-family: var(--font-primary);
@@ -1651,6 +1653,7 @@ const submitRejection = async () => {
   padding: 12px;
   border-radius: 20px;
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.15);
   transition: var(--transition-smooth);
 }
 
@@ -1669,7 +1672,7 @@ const submitRejection = async () => {
 }
 
 .btn-mobile-approve:active {
-  background: #355670;
+  background: #059669;
   transform: scale(0.98);
 }
 
